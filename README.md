@@ -12,7 +12,6 @@ __`Messages deletion`__ - Users may delete their own messages.
 __`Mail any sender`__ - Clicking on a user's name starts the action of sending him a mail through G-Mail.  
 __`Nice to have`__ - Search categories bar, clear text button, auto scroll buttons.  
 __`Custom pages`__ - Custom Loading, Error and NotFound pages.  
-  
 
 __`Dark theme`__ - Users may choose between light and dark theme. Choice is remembered between sessions. 
 <p><img src="https://user-images.githubusercontent.com/56603839/222463807-e6f018c3-8a91-4d85-9731-82c8d562848a.png"></p>
