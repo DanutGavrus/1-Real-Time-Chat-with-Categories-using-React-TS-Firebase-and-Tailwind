@@ -2,20 +2,17 @@ import { CollectionReference, deleteDoc, doc, DocumentData } from "firebase/fire
 import { MutableRefObject } from "react";
 import { useOutletContext } from "react-router-dom";
 import { MessageType } from "../LiveChat";
-import { MessageActions } from "./MessagesList";
 
 type Props = {
   message: MessageType,
-  messagesListDb: CollectionReference<DocumentData>,
-  messagesListActionRef: MutableRefObject<{ action: MessageActions }>
+  messagesListDb: CollectionReference<DocumentData>
 };
 
-export default function Message({ message, messagesListDb, messagesListActionRef }: Props) {
+export default function Message({ message, messagesListDb }: Props) {
   const { user } = useOutletContext() as LiveChatContext;
 
   const handleDeleteMessage = () => {
     deleteDoc(doc(messagesListDb, message.id));
-    messagesListActionRef.current.action = MessageActions.Deleted;
   }
 
   return (

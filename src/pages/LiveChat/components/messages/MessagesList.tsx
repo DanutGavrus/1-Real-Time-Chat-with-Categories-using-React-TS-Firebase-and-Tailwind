@@ -4,10 +4,6 @@ import { MessageType } from "../LiveChat";
 import Message from "./Message";
 import MessagesBar from "./MessagesBar";
 
-export enum MessageActions {
-  Added,
-  Deleted
-};
 type Props = {
   categoryId: string,
   messagesList: MessageType[] | null,
@@ -18,13 +14,18 @@ type Props = {
 export default function MessagesList({ categoryId, messagesList, messagesListRef,
   messagesListDb }: Props) {
 
-  const messagesListActionRef = useRef({ action: MessageActions.Added });
+  const messagesListPrevLenRef = useRef({ prevLen: messagesList?.length ?? 0 });
   useEffect(() => {
-    // For "Deleted" we do not want to automatically scroll to bottom
-    if (messagesListActionRef?.current?.action === MessageActions.Added) {
+    // Scroll all users to bottom only when someone adds a new message
+    if (messagesListPrevLenRef?.current?.prevLen < (messagesList?.length ?? 0)) {
       messagesListRef?.current?.scrollTo(0, messagesListRef?.current?.scrollHeight);
     }
+    messagesListPrevLenRef.current.prevLen = messagesList?.length ?? 0;
   }, [messagesList, messagesListRef]);
+
+  useEffect(() => {
+    messagesListRef?.current?.scrollTo(0, messagesListRef?.current?.scrollHeight);
+  }, [categoryId, messagesListRef]);
 
   return (
     <>
@@ -32,12 +33,12 @@ export default function MessagesList({ categoryId, messagesList, messagesListRef
       {messagesList && messagesList.length > 0 &&
         <ul className="mb-auto">
           {messagesList.map((message) => {
-            return <Message key={message.id} message={message} messagesListDb={messagesListDb} messagesListActionRef={messagesListActionRef} />
+            return <Message key={message.id} message={message} messagesListDb={messagesListDb} />
           })}
         </ul>
       }
 
-      <MessagesBar categoryId={categoryId} messagesListDb={messagesListDb} messagesListActionRef={messagesListActionRef} />
+      <MessagesBar categoryId={categoryId} messagesListDb={messagesListDb} />
     </>
   )
 }

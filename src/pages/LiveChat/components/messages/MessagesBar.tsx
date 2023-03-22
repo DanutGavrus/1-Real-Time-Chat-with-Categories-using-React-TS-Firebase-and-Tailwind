@@ -1,15 +1,13 @@
 import { useState, useRef, MutableRefObject } from "react";
 import { useOutletContext } from "react-router-dom";
 import { addDoc, CollectionReference, DocumentData, serverTimestamp } from "firebase/firestore";
-import { MessageActions } from "./MessagesList";
 
 type Props = {
   categoryId: string,
-  messagesListDb: CollectionReference<DocumentData>,
-  messagesListActionRef: MutableRefObject<{ action: MessageActions }>
+  messagesListDb: CollectionReference<DocumentData>
 };
 
-export default function MessagesBar({ categoryId, messagesListDb, messagesListActionRef }: Props) {
+export default function MessagesBar({ categoryId, messagesListDb }: Props) {
   const { user } = useOutletContext() as LiveChatContext;
 
   const [messageContent, setMessageContent] = useState("");
@@ -32,7 +30,6 @@ export default function MessagesBar({ categoryId, messagesListDb, messagesListAc
       if (messageInputRef.current) {
         messageInputRef.current.value = "";
       }
-      messagesListActionRef.current.action = MessageActions.Added;
     }
   }
 
