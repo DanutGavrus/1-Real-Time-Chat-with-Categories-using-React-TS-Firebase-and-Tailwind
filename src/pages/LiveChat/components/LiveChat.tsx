@@ -20,32 +20,37 @@ export type MessageType = {
 };
 type Props = {
   categoriesList: CategoryType[]
-}
+};
 
 export default function LiveChat({ categoriesList }: Props) {
   const { app } = useOutletContext() as LiveChatContext;
 
   const [categoryId, setCategoryId] = useState(categoriesList[0].id);
-  const [chatHeader, setChatHeader] = useState(`${categoriesList[0].unicode} ${categoriesList[0].title}`);
+  const [chatHeader, setChatHeader] = useState(
+    `${categoriesList[0].unicode} ${categoriesList[0].title}`
+  );
 
   const messagesListDb = collection(getFirestore(app), "messagesList");
-  const [messagesListCollection, loading, error] = useCollection(query(messagesListDb, where("categoryId", "==", categoryId), orderBy("timestamp")));
-  const messagesList: MessageType[] | null = messagesListCollection?.docs ? messagesListCollection.docs.map((doc) => {
+  const [messagesListCollection, loading, error] = useCollection(
+    query(messagesListDb, where("categoryId", "==", categoryId), orderBy("timestamp"))
+  );
+  const messagesList: MessageType[] | null = messagesListCollection?.docs?.map((doc) => {
     return { id: doc.id, ...doc.data() } as MessageType
-  }) : null;
+  }) ?? null;
 
   const categoriesBtnRef = useRef<HTMLButtonElement>(null);
-  const cateogiresListRef = useRef<HTMLDivElement>(null);
+  const categoriesListRef = useRef<HTMLDivElement>(null);
   const messagesListRef = useRef<HTMLDivElement>(null);
+
   const toggleShowCategories = () => {
-    if (cateogiresListRef?.current?.classList?.contains("hidden")) {
-      cateogiresListRef.current.classList.remove("hidden");
-      cateogiresListRef.current.classList.add("flex");
+    if (categoriesListRef?.current?.classList?.contains("hidden")) {
+      categoriesListRef.current.classList.remove("hidden");
+      categoriesListRef.current.classList.add("flex");
       messagesListRef?.current?.classList?.remove("flex");
       messagesListRef?.current?.classList?.add("hidden");
     } else {
-      cateogiresListRef?.current?.classList.remove("flex");
-      cateogiresListRef?.current?.classList.add("hidden");
+      categoriesListRef?.current?.classList.remove("flex");
+      categoriesListRef?.current?.classList.add("hidden");
       messagesListRef?.current?.classList?.remove("hidden");
       messagesListRef?.current?.classList?.add("flex");
     }
@@ -56,7 +61,7 @@ export default function LiveChat({ categoriesList }: Props) {
 
   return (
     <>
-      <CategoriesList innerRef={cateogiresListRef} categoriesList={categoriesList} setCategoryId={setCategoryId} setChatHeader={setChatHeader} toggleShowCategories={toggleShowCategories} />
+      <CategoriesList innerRef={categoriesListRef} categoriesList={categoriesList} setCategoryId={setCategoryId} setChatHeader={setChatHeader} toggleShowCategories={toggleShowCategories} />
 
       <div ref={messagesListRef as LegacyRef<HTMLDivElement>} className="relative hidden sm:flex flex-col col-span-4 sm:col-span-3 overflow-y-scroll scrollbar-fancy rounded-l-xl rounded-r-md bg-black bg-opacity-5">
         <div className="flex items-center sticky top-0 py-4 sm:py-6 backdrop-blur-sm">

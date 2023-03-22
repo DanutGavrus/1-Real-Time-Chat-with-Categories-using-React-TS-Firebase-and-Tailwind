@@ -8,9 +8,10 @@ type Props = {
   toggleShowCategories: Function,
   innerRef?: RefObject<HTMLLIElement>,
   last?: boolean
-}
+};
 
-export default function Category({ category, setCategoryId, setChatHeader, toggleShowCategories, innerRef, last }: Props) {
+export default function Category({ category, setCategoryId, setChatHeader,
+  toggleShowCategories, innerRef, last }: Props) {
   const chatHeader = `${category.unicode} ${category.title}`;
 
   const updateChat = (categoryId: string, chatHeader: string) => {
@@ -19,13 +20,10 @@ export default function Category({ category, setCategoryId, setChatHeader, toggl
     toggleShowCategories();
   }
 
-  let liClassName = "pl-3 hover:cursor-pointer";
-  if (!last) {
-    liClassName += " mb-6";
-  }
-
   return (
-    <li ref={innerRef as LegacyRef<HTMLLIElement>} onClick={() => { updateChat(category.id, chatHeader) }} className={liClassName}>
+    <li ref={innerRef as LegacyRef<HTMLLIElement>}
+      onClick={() => { updateChat(category.id, chatHeader) }}
+      className={`pl-3 hover:cursor-pointer ${!last ? "mb-6" : ""}`}>
       <h4>{chatHeader}</h4>
       <p className="font-thin font-[system-ui]">{category.description}</p>
     </li>

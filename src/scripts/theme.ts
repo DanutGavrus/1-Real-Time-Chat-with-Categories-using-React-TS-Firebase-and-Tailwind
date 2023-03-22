@@ -1,32 +1,15 @@
 const setTheme = () => {
-  if (!localStorage.theme) {
-    localStorage.theme = "light";
-  }
-  if (localStorage.theme === "light") {
+  if (localStorage.isDarkTheme === "false") {
     document.documentElement.classList.remove("dark");
   }
-  if (localStorage.theme === "dark") {
+  if (localStorage.isDarkTheme === "true") {
     document.documentElement.classList.add("dark");
   }
 }
 
-const setThemeToggleState = (toggle: HTMLInputElement) => {
-  if (localStorage.theme === "light") {
-    toggle.checked = false;
-  }
-  if (localStorage.theme === "dark") {
-    toggle.checked = true;
-  }
-}
-
-const setExplicitTheme = (checked: boolean) => {
-  if (!checked) {
-    localStorage.theme = "light";
-  }
-  if (checked) {
-    localStorage.theme = "dark";
-  }
+const setExplicitTheme = (isDarkTheme: boolean) => {
+  localStorage.isDarkTheme = `${isDarkTheme}`;
   setTheme();
 }
 
-export { setTheme, setThemeToggleState, setExplicitTheme };
+export { setTheme, setExplicitTheme };

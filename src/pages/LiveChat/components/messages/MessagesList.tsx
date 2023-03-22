@@ -4,18 +4,24 @@ import { MessageType } from "../LiveChat";
 import Message from "./Message";
 import MessagesBar from "./MessagesBar";
 
+export enum MessageActions {
+  Added,
+  Deleted
+};
 type Props = {
   categoryId: string,
   messagesList: MessageType[] | null,
   messagesListRef: RefObject<HTMLDivElement>,
   messagesListDb: CollectionReference<DocumentData>
-}
+};
 
-export default function MessagesList({ categoryId, messagesList, messagesListRef, messagesListDb }: Props) {
-  const messagesListActionRef = useRef({ action: "added" }); // added or deleted
+export default function MessagesList({ categoryId, messagesList, messagesListRef,
+  messagesListDb }: Props) {
+
+  const messagesListActionRef = useRef({ action: MessageActions.Added });
   useEffect(() => {
-    // For "deleted" we do not want to automatically scroll to bottom
-    if (messagesListActionRef?.current?.action === "added") {
+    // For "Deleted" we do not want to automatically scroll to bottom
+    if (messagesListActionRef?.current?.action === MessageActions.Added) {
       messagesListRef?.current?.scrollTo(0, messagesListRef?.current?.scrollHeight);
     }
   }, [messagesList, messagesListRef]);
