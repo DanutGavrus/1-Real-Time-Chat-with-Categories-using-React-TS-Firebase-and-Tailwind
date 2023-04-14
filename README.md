@@ -1,4 +1,4 @@
-# <p align="center">Real Time Chat with Categories</p> 
+# <p align="center">Real Time Web Messaging</p>
 ##### <p align="center">Web application developed using React TS, Firebase and Tailwind.</p>
 ###### <p align="center">Deployed at: https://live-chat-bde08.firebaseapp.com.</p>  
 ![](https://user-images.githubusercontent.com/56603839/222463742-902ebdb5-1f0e-4550-a67b-4d9fee5bbd27.png)
@@ -6,7 +6,7 @@
 ## Features
 __`Real time`__ - Messages are updated in real time for everybody.  
 __`Users authentication`__ - Users need to sign in. Auth state is managed in the context of the whole app.  
-__`Concurrent accounts`__ - Chat handles any number of concurrent accounts.  
+__`Concurrent accounts`__ - Application handles any number of concurrent accounts.  
 __`Multiple categories`__ - Each user may write different messages in each.  
 __`Messages deletion`__ - Users may delete their own messages.  
 __`Mail any sender`__ - Clicking on a user's name starts the action of sending him a mail through G-Mail.  
