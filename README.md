@@ -1,6 +1,6 @@
 # <p align="center">Real Time Web Messaging Application</p>
 ##### <p align="center">Technologies used: React TS, Firebase and Tailwind.</p>
-###### <p align="center">Deployed at: https://live-chat-bde08.firebaseapp.com.</p>  
+###### <p align="center">Live at: https://live-chat-bde08.firebaseapp.com.</p>  
 ![](https://user-images.githubusercontent.com/56603839/222463742-902ebdb5-1f0e-4550-a67b-4d9fee5bbd27.png)
 
 ## Features
