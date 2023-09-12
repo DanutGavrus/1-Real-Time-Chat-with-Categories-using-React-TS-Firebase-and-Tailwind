@@ -38,4 +38,4 @@ Firestore provides __rules__ for __accessing the data__ and __I've configured it
 | ------------- | ------------- |  
 
 ## Automatic CI/CD on GitHub
-* Any `push` and `merged pull request` into the `main branch` will `automatically` trigger an `action` on GitHub which updates the deployed application at: https://live-chat-bde08.firebaseapp.com.
+* Any `push` and `merged pull request` into the `main branch` will `automatically` trigger an `action` on [GitHub](https://github.com/DanutGavrus/Real-Time-Web-Messaging-using-React-TS-Firebase-and-Tailwind-CSS/actions/workflows/firebase-hosting-merge.yml) which updates the deployed application at [Firebase](https://github.com/DanutGavrus/Real-Time-Web-Messaging-using-React-TS-Firebase-and-Tailwind-CSS/blob/main/.github/workflows/firebase-hosting-merge.yml).
